@@ -2,7 +2,7 @@
 #*    Copyright (C) 2024 
 #*    This library is free software
 #***************************************************************************
-
+import inspect
 import os
 import sys
 import FreeCAD
@@ -10,7 +10,8 @@ import FreeCADGui
 
 class ShapedSteelShowCommand:
     def GetResources(self):
-        from Init import module_path
+        file_path = inspect.getfile(inspect.currentframe())
+        module_path=os.path.dirname(file_path)
         return { 
           'Pixmap': os.path.join(module_path, 'icons', "ShapedSteel.svg"),
           'MenuText': "ShapedSteel",
@@ -35,7 +36,8 @@ class ShapedSteelShowCommand:
 
 class ShapedSteelWB(FreeCADGui.Workbench):
     def __init__(self):
-        from Init import module_path
+        file_path = inspect.getfile(inspect.currentframe())
+        module_path=os.path.dirname(file_path)
         self.__class__.Icon = os.path.join(module_path, 'icons', "ShapedSteel.svg")
         self.__class__.MenuText = "ShapedSteel"
         self.__class__.ToolTip = "ShapedSteel by Pascal"
